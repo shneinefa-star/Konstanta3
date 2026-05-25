@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оставить заявку - ПП Д</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f0f1e 0%, #1a2332 50%, #0f0f1e 100%);
+      min-height: 100vh;
+    }
+
+    .order-container {
+      max-width: 600px;
+      margin: 80px auto 60px;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .order-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .order-header h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .order-header span {
+      font-size: 32px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px 14px;
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      color: #333;
+      font-size: 13px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #00d4ff;
+      background: #fff;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .submit-btn {
+      flex: 1;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+      border: none;
+      border-radius: 6px;
+      color: #0f0f1e;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 212, 255, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .back-btn {
+      flex: 1;
+      padding: 14px 20px;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 6px;
+      color: #333;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .service-info {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border-left: 4px solid #00d4ff;
+    }
+
+    .service-info p {
+      margin: 0;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .required {
+      color: #ff6b6b;
+    }
+
+    .success-message {
+      display: none;
+      background: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border: 1px solid #c3e6cb;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    nav {
+      background: linear-gradient(135deg, rgba(15, 15, 30, 0.95) 0%, rgba(26, 35, 50, 0.95) 100%);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00d4ff;
+    }
+  </style>
+</head>
+<body>
+  <nav style="padding: 15px 30px; display: flex; gap: 30px;">
+    <a href="/" style="font-weight: 600;">ПП Д</a>
+    <a href="/calculator">← Назад к калькулятору</a>
+  </nav>
+
+  <div class="order-container">
+    <div class="order-header">
+      <span>📋</span>
+      <h1>Оставить заявку</h1>
+    </div>
+
+    <div class="service-info">
+      <p>Заполните форму ниже, и наш менеджер свяжется с вами в ближайшее время для уточнения деталей и согласования стоимости.</p>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      ✓ Спасибо! Ваша заявка успешно отправлена. Мы вскоре с вами свяжемся.
+    </div>
+
+    <form id="orderForm">
+      
+      <div class="form-group">
+        <label>
+          <span>👤</span> Ваше имя <span class="required">*</span>
+        </label>
+        <input type="text" id="order-name" required placeholder="Иван Иванов">
+      </div>
+
+  
+      <div class="form-group">
+        <label>
+          <span>📱</span> Телефон <span class="required">*</span>
+        </label>
+        <input type="tel" id="order-phone" required placeholder="+7 (999) 999-99-99">
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          <span>🖨️</span> Услуга <span class="required">*</span>
+        </label>
+        <select id="order-service" required>
+          <option value="">Выберите услугу</option>
+          <option value="Визитные карточки">Визитные карточки</option>
+          <option value="Листовки">Листовки</option>
+          <option value="Баннеры">Баннеры</option>
+          <option value="Календари">Календари</option>
+          <option value="Упаковка">Упаковка</option>
+          <option value="Плакаты">Плакаты</option>
+        </select>
+      </div>
+
+    
+      <div class="form-group">
+        <label>
+          <span>📍</span> Адрес доставки
+        </label>
+        <input type="text" id="order-address" placeholder="г. Москва, ул. Примера, д. 1">
+      </div>
+
+      <div class="form-group">
+        <label>
+          <span>📅</span> Желаемая дата готовности
+        </label>
+        <input type="date" id="order-date">
+      </div>
+
+      <div class="form-group">
+        <label>
+          <span>💬</span> Дополнительный комментарий
+        </label>
+        <textarea id="order-comment" placeholder="Расскажите нам о своём проекте, размерах, особых требованиях..."></textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="submit-btn">✓ Отправить заявку</button>
+        <button type="button" class="back-btn" onclick="window.location.href='/calculator'">← Назад</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = {
+        name: document.getElementById('order-name').value,
+        phone: document.getElementById('order-phone').value,
+        service: document.getElementById('order-service').value,
+        address: document.getElementById('order-address').value,
+        date: document.getElementById('order-date').value,
+        comment: document.getElementById('order-comment').value
+      };
+
+      try {
+        const response = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          document.getElementById('successMessage').classList.add('show');
+          document.getElementById('orderForm').reset();
+          setTimeout(() => {
+            window.location.href = '/calculator';
+          }, 2000);
+        } else {
+          alert('Ошибка при отправке формы');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ошибка сети');
+      }
+    });
+
+    fetch('/api/user').then(r=>r.json()).then(d=>{
+      if(d.user){
+        document.getElementById('order-name').value = d.user;
+      }
+    });
+  </script>
+<script src="particles.js"></script>
+<script src="/chat-widget.js"></script>
+</body>
+</html>

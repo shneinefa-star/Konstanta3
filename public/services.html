@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Услуги - ООО КОНСТАНТА Типография</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">КОН5ТАНТА</div>
+  <div class="menu">
+    <a href="/">Главная</a>
+    <a href="/about">О нас</a>
+    <a href="/services" style="color: var(--accent)">Услуги</a>
+    <a href="/calculator">Калькулятор</a>
+    <a href="/contacts">Контакты</a>
+    <a href="/profile" style="color: var(--accent)">👤 Профиль</a>
+    <span id="admin-link" style="display:none"><a href="/admin">👑 Админ</a></span>
+    <button id="logout-btn" style="display:none; background: var(--accent-alt)" onclick="logout()">Выход</button>
+  </div>
+</nav>
+
+<div class="content">
+  <section class="services-header" style="margin-bottom: 80px;">
+    <h1 style="font-family: 'Georgia', serif; font-size: 56px; font-weight: 400; margin-bottom: 20px; color: var(--text-light);">Каталог услуг</h1>
+    <p style="font-size: 18px; color: var(--text-muted); max-width: 600px;">Полный спектр полиграфических услуг премиум-класса. Мы предлагаем профессиональное решение для всех ваших потребностей в печати.</p>
+    <div style="margin-top: 30px; display: flex; gap: 20px; align-items: center;">
+      <div style="width: 100px; height: 3px; background: linear-gradient(90deg, var(--accent), transparent);"></div>
+      <div style="font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">✨ Премиум качество ✨</div>
+    </div>
+  </section>
+
+  <section class="services-info" style="margin: 0; padding: 80px 60px; border-top: 2px solid rgba(0, 212, 255, 0.15); border-bottom: 2px solid rgba(0, 212, 255, 0.15);">
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-icon">📇</div>
+        <h3>Визитные карточки</h3>
+        <p>Премиум визитки с позолотой, тиснением, матовой ламинацией. Размеры: 90х50 мм. Толстая бумага 350 г/м². От 250₽ за 100 шт. 💎</p>
+        <ul class="service-details">
+          <li>✓ Стандартные классические визитки</li>
+          <li>✓ Премиум визитки с тиснением</li>
+          <li>✓ Пластиковые дисконтные карты</li>
+          <li>✓ Магнитные карты и визитки</li>
+        </ul>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">📋</div>
+        <h3>Листовки и плакаты</h3>
+        <p>Цветные листовки, плакаты любого размера. Двусторонняя печать CMYK, мелованная бумага. От 180₽ за 100 шт. А5, А4, А3. 🎨</p>
+        <ul class="service-details">
+          <li>✓ Листовки А5, А4, А3</li>
+          <li>✓ Плакаты 50х70, 70х100 см</li>
+          <li>✓ Мелованная и матовая бумага</li>
+          <li>✓ Глянцевая ламинация</li>
+        </ul>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">📚</div>
+        <h3>Брошюры и каталоги</h3>
+        <p>Полиграфические брошюры от 8 до 300 страниц. Клеевой переплёт, твёрдая обложка. От 780₽ за брошюру. Премиум качество. 📖</p>
+        <ul class="service-details">
+          <li>✓ Брошюры на скобе (8-32 стр)</li>
+          <li>✓ Брошюры с клеевым переплетом</li>
+          <li>✓ Каталоги 100+ страниц</li>
+          <li>✓ Твёрдые обложки</li>
+        </ul>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🎉</div>
+        <h3>Документы и грамоты</h3>
+        <p>Красиво оформленные грамоты, сертификаты, приглашения. На дизайнерской бумаге с персональной печатью. От 420₽ за шт. 🏆</p>
+        <ul class="service-details">
+          <li>✓ Грамоты и сертификаты</li>
+          <li>✓ Приглашения на мероприятия</li>
+          <li>✓ Персональная печать</li>
+          <li>✓ Дизайнерская бумага</li>
+        </ul>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🎨</div>
+        <h3>Баннеры</h3>
+        <p>Наружные баннеры до 10х10м, Roll-up мобильные баннеры. Печать на ПВХ с укреплением. От 1800₽. Долговечная краска. 🌟</p>
+        <ul class="service-details">
+          <li>✓ Уличные баннеры 3х2, 5x3 м</li>
+          <li>✓ Roll-up баннеры 2х0.8 м</li>
+          <li>✓ ПВХ ткань высокой плотности</li>
+          <li>✓ Сольвентная печать (3+ года)</li>
+        </ul>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🏷️</div>
+        <h3>Наклейки и этикетки</h3>
+        <p>Самоклеящиеся виниловые наклейки, этикетки на рулонах. Водостойкие, устойчивые к УФ. От 320₽ за 100 шт. ✨</p>
+        <ul class="service-details">
+          <li>✓ Виниловые наклейки</li>
+          <li>✓ Этикетки на рулонах</li>
+          <li>✓ Прозрачная и цветная основа</li>
+          <li>✓ Водостойкие чернила</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" style="margin: 0; padding: 80px 60px;">
+    <div style="max-width: 1420px; margin: 0 auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 50px;">
+        <div>
+          <h2 style="font-family: 'Georgia', serif; font-size: 44px; font-weight: 400; margin: 0; color: var(--text-light);">Полный каталог</h2>
+          <p style="color: var(--text-muted); margin-top: 8px; font-size: 14px;">Фильтруйте услуги по категориям</p>
+        </div>
+      </div>
+      <div class="categories">
+        <button class="cat-btn active" onclick="filterProducts('all')">⭐ Все</button>
+        <button class="cat-btn" onclick="filterProducts('documents')">📋 Документы</button>
+        <button class="cat-btn" onclick="filterProducts('cards')">🏷️ Визитки</button>
+        <button class="cat-btn" onclick="filterProducts('banners')">📢 Баннеры</button>
+        <button class="cat-btn" onclick="filterProducts('brochures')">📚 Брошюры</button>
+        <button class="cat-btn" onclick="filterProducts('flyers')">📰 Листовки</button>
+        <button class="cat-btn" onclick="filterProducts('stickers')">✨ Наклейки</button>
+      </div>
+      <div id="products" class="grid"></div>
+    </div>
+  </section>
+
+  <section style="background: linear-gradient(135deg, var(--primary) 0%, #151524 100%); background-attachment: fixed; padding: 80px 60px; margin: 0;">
+    <div style="max-width: 1420px; margin: 0 auto;">
+      <h2 style="font-family: 'Georgia', serif; font-size: 44px; font-weight: 400; margin-bottom: 60px; color: var(--text-light); text-align: center;">Почему выбирают именно нас?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <h3>Скорость печати</h3>
+          <p>Сверхвысокая скорость печати без потери качества. Краткие сроки от 1 дня. 🚀</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎨</div>
+          <h3>Профессиональный дизайн</h3>
+          <p>Профессиональные дизайнеры разработают макет по вашим требованиям. ✨</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🔒</div>
+          <h3>Гарантия качества</h3>
+          <p>100% гарантия качества печати или возврат денег. ✅</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3>Лучшие цены</h3>
+          <p>Конкурентные цены без скрытых комиссий и переплат. 💎</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📦</div>
+          <h3>Бесплатная доставка</h3>
+          <p>Бесплатная доставка по МСК при заказе от 3000₽. 🎁</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">👥</div>
+          <h3>Опыт 15 лет</h3>
+          <p>Более 15 лет опыта и 10000+ выполненных проектов. 🏆</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>О компании</h4>
+      <p>ООО КОНСТАНТА - профессиональная типография с 15-летним опытом</p>
+    </div>
+    <div class="footer-section">
+      <h4>Контакты</h4>
+      <p>📞 +7 (495) 123-45-67</p>
+      <p>✉️ info@konstanta.ru</p>
+      <p>📍 г. Москва</p>
+    </div>
+    <div class="footer-section">
+      <h4>Часы работы</h4>
+      <p>Пн-Пт: 09:00 - 18:00</p>
+      <p>Сб-Вс: Выходной</p>
+    </div>
+    <div class="footer-section">
+      <h4>Быстрые ссылки</h4>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/services">Услуги</a>
+      <a href="/contacts">Контакты</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 ООО КОНСТАНТА. Все права защищены.</p>
+  </div>
+</footer>
+
+<script>
+let allServices = [];
+
+function loadAllProducts() {
+  fetch('/api/products').then(r=>r.json()).then(services => {
+    allServices = services;
+    renderProducts('all');
+  }).catch(e => {
+    console.log('Error loading services:', e);
+    document.getElementById('products').innerHTML = '<p style="text-align:center; color:#999;">Ошибка загрузки услуг</p>';
+  });
+}
+
+function renderProducts(category = 'all') {
+  let toDisplay = allServices;
+  
+  if(category !== 'all') {
+    toDisplay = allServices.filter(p => p.category === category);
+  }
+  
+  if(toDisplay.length === 0) {
+    document.getElementById('products').innerHTML = '<p style="text-align:center; color:#999;">Услуги не найдены</p>';
+    return;
+  }
+  
+  document.getElementById('products').innerHTML = toDisplay.map(p=>`
+    <div class="card" data-category="${p.category}">
+      <div class="card-icon" style="font-size: 40px; text-align: center; padding: 15px 0;">${p.img || '📄'}</div>
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <p style="color: var(--accent); font-weight: bold; margin-top: 10px;">${p.price} ₽</p>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderProducts(cat);
+}
+
+loadAllProducts();
+
+fetch('/api/user').then(r=>r.json()).then(d=>{
+  if(d.user){
+    if(document.getElementById('auth-link')) {
+      document.getElementById('auth-link').innerHTML = '';
+    }
+    document.getElementById('logout-btn').style.display = 'block';
+    if(d.role==='admin') document.getElementById('admin-link').style.display = 'block';
+  }
+});
+
+function logout(){
+  fetch('/api/logout').then(()=>window.location.href='/');
+}
+</script>
+<script src="particles.js"></script>
+<script src="/chat-widget.js"></script>
+</body>
+</html>

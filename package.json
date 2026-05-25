@@ -1,0 +1,20 @@
+{
+  "name": "tipография-site",
+  "version": "1.0.0",
+  "main": "src/app.js",  "engines": {
+    "node": "18.x"
+  },  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "body-parser": "^1.20.2",
+    "express-session": "^1.17.3",
+    "bcrypt": "^5.1.0"
+  },
+  "keywords": ["typograph", "portfolio"],
+  "author": "",
+  "license": "ISC"
+}

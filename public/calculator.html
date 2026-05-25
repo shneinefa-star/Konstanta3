@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор стоимости - ООО КОНСТАНТА</title>
+<link rel="stylesheet" href="style.css">
+<script>
+let currentService = 'documents';
+let prices = {
+  documents: { bw: 2, color: 5, double: 8 },
+  cards: { matte: 0.15, glossy: 0.18, varnish: 0.25 },
+  banners: { vinyl: 400, fabric: 500 },
+  brochures: { staple: 50, glue: 70, hard: 150 },
+  flyers: { 80: 0.5, 130: 0.7, merch: 0.9 },
+  stickers: { matte: 0.8, glossy: 1, transparent: 1.2 }
+};
+
+function selectService(btn, service) {
+  document.querySelectorAll('.service-btn').forEach(b => {
+    b.style.background = 'rgba(0, 212, 255, 0.1)';
+    b.style.border = '2px solid var(--border)';
+    b.style.color = 'var(--text-light)';
+    b.style.boxShadow = 'none';
+  });
+  btn.style.background = 'linear-gradient(135deg, var(--accent), #0099cc)';
+  btn.style.border = 'none';
+  btn.style.color = '#0f0f1e';
+  btn.style.boxShadow = '0 4px 12px rgba(0, 212, 255, 0.3)';
+  
+  currentService = service;
+  document.querySelectorAll('.config-section').forEach(s => s.style.display = 'none');
+  document.getElementById(service + '-config').style.display = 'block';
+  updatePrice();
+}
+
+function updateDocFormat(val) {
+  const formats = { 210: 'A4', 297: 'A3', 420: 'A2' };
+  document.getElementById('doc-format-display').textContent = formats[val] || 'A4';
+  document.getElementById('spec-format').textContent = formats[val] || 'A4';
+}
+
+function updateDocQuantity(val) {
+  document.getElementById('doc-quantity-display').textContent = val;
+  document.getElementById('spec-quantity').textContent = val + ' шт';
+}
+
+function updateCardsQty(val) {
+  document.getElementById('cards-qty-display').textContent = val;
+  document.getElementById('spec-quantity').textContent = val + ' шт';
+}
+
+function updateBannerHeight(val) {
+  document.getElementById('banner-height-display').textContent = val;
+}
+
+function updateBannerWidth(val) {
+  document.getElementById('banner-width-display').textContent = val;
+}
+
+function updateBrochurePages(val) {
+  document.getElementById('brochure-pages-display').textContent = val;
+}
+
+function updateBrochureQty(val) {
+  document.getElementById('brochure-qty-display').textContent = val;
+  document.getElementById('spec-quantity').textContent = val + ' шт';
+}
+
+function updateFlyerQty(val) {
+  document.getElementById('flyer-qty-display').textContent = val;
+  document.getElementById('spec-quantity').textContent = val + ' шт';
+}
+
+function updateStickerQty(val) {
+  document.getElementById('sticker-qty-display').textContent = val;
+  document.getElementById('spec-quantity').textContent = val + ' шт';
+}
+
+function updatePrice() {
+  let basePrice = 2500;
+  let quantity = 500;
+  let discount = 0;
+
+  if (currentService === 'documents') {
+    quantity = parseInt(document.getElementById('doc-quantity').value);
+    const type = document.getElementById('doc-color').value;
+    const pricePerUnit = { bw: 2, color: 5, double: 8 }[type];
+    basePrice = quantity * pricePerUnit;
+    document.getElementById('spec-service').textContent = 'Документы';
+    document.getElementById('spec-print').textContent = { bw: 'Ч/Б', color: 'Цветная', double: 'Двусторонняя' }[type];
+  } else if (currentService === 'cards') {
+    quantity = parseInt(document.getElementById('cards-qty').value);
+    const material = document.getElementById('cards-material').value;
+    const pricePerUnit = { matte: 0.15, glossy: 0.18, varnish: 0.25 }[material];
+    basePrice = quantity * pricePerUnit;
+    document.getElementById('spec-service').textContent = 'Визитки';
+    document.getElementById('spec-material').textContent = { matte: 'Матовая', glossy: 'Глянцевая', varnish: 'С УФ-лаком' }[material];
+  } else if (currentService === 'banners') {
+    const h = parseFloat(document.getElementById('banner-height').value);
+    const w = parseFloat(document.getElementById('banner-width').value);
+    const material = document.getElementById('banner-material').value;
+    const pricePerM2 = { vinyl: 400, fabric: 500 }[material];
+    basePrice = (h * w * pricePerM2);
+    document.getElementById('spec-service').textContent = 'Баннер ' + h + 'м × ' + w + 'м';
+    document.getElementById('spec-material').textContent = { vinyl: 'Винил', fabric: 'Ткань' }[material];
+    quantity = 1;
+  } else if (currentService === 'brochures') {
+    const pages = parseInt(document.getElementById('brochure-pages').value);
+    quantity = parseInt(document.getElementById('brochure-qty').value);
+    const pricePerUnit = (pages / 4) * 15;
+    basePrice = quantity * pricePerUnit;
+    document.getElementById('spec-service').textContent = 'Брошюры ' + pages + ' стр';
+    document.getElementById('spec-print').textContent = 'Цветная печать';
+  } else if (currentService === 'flyers') {
+    quantity = parseInt(document.getElementById('flyer-qty').value);
+    const paper = document.getElementById('flyer-paper').value;
+    const pricePerUnit = { 80: 0.5, 130: 0.7, merch: 0.9 }[paper];
+    basePrice = quantity * pricePerUnit;
+    document.getElementById('spec-service').textContent = 'Листовки';
+    document.getElementById('spec-material').textContent = { 80: 'Белая 80 г', 130: 'Белая 130 г', merch: 'Мелованная' }[paper];
+  } else if (currentService === 'stickers') {
+    quantity = parseInt(document.getElementById('sticker-qty').value);
+    const finish = document.getElementById('sticker-finish').value;
+    const pricePerUnit = { matte: 0.8, glossy: 1, transparent: 1.2 }[finish];
+    basePrice = quantity * pricePerUnit;
+    document.getElementById('spec-service').textContent = 'Наклейки';
+    document.getElementById('spec-finish').textContent = { matte: 'Матовая', glossy: 'Глянцевая', transparent: 'Прозрачная' }[finish];
+  }
+
+  if (quantity >= 5000) discount = basePrice * 0.15;
+  else if (quantity >= 1000) discount = basePrice * 0.10;
+  else if (quantity >= 500) discount = basePrice * 0.05;
+
+  const finalPrice = Math.round(basePrice - discount);
+  document.getElementById('base-price').textContent = Math.round(basePrice) + ' ₽';
+  document.getElementById('discount-display').textContent = discount > 0 ? '-' + Math.round(discount) + ' ₽' : '0 ₽';
+  document.getElementById('final-price').textContent = finalPrice;
+}
+
+function orderNow() {
+  document.getElementById('orderForm').reset();
+  document.getElementById('orderModal').style.display = 'flex';
+}
+
+function closeOrderModal() {
+  document.getElementById('orderModal').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('orderForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+      name: document.getElementById('order-name').value,
+      phone: document.getElementById('order-phone').value,
+      service: document.getElementById('order-service').value,
+      address: document.getElementById('order-address').value,
+      date: document.getElementById('order-date').value,
+      comment: document.getElementById('order-comment').value
+    };
+
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert('✓ Спасибо! Ваша заявка отправлена.\\nМы свяжемся с вами в ближайшее время.');
+        closeOrderModal();
+      } else {
+        alert('Ошибка при отправке заявки. Попробуйте снова.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Ошибка при отправке. Пожалуйста, свяжитесь с нами по телефону +7 (495) 123-45-67');
+    }
+  });
+
+  updatePrice();
+});
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">КОН5ТАНТА</div>
+  <div class="menu">
+    <a href="/">Главная</a>
+    <a href="/about">О нас</a>
+    <a href="/services">Услуги</a>
+    <a href="/calculator">Калькулятор</a>
+    <a href="/contacts">Контакты</a>
+    <a href="/profile" style="color: var(--accent)">👤 Профиль</a>
+    <span id="admin-link" style="display:none"><a href="/admin">👑 Админ</a></span>
+    <button id="logout-btn" style="display:none; background: var(--accent-alt)" onclick="logout()">Выход</button>
+  </div>
+</nav>
+
+<div class="content">
+  <h1>💰 Калькулятор стоимости печати</h1>
+  <p style="color: var(--text-muted); margin-bottom: 60px; max-width: 900px; font-size: 14px; line-height: 1.8;">Рассчитайте стоимость вашего проекта за 30 секунд. Наш интеллектуальный калькулятор учитывает все параметры печати и дает точную цену с учётом скидок по объёму.</p>
+
+  <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center;">
+    <div style="width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), transparent);"></div>
+    <div style="font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">⚡ Точные расчёты</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 380px; gap: 40px; margin-bottom: 120px;">
+    <!-- Left Column: Configuration Form -->
+    <div>
+      <div style="padding: 40px; border: 1px solid var(--border); border-radius: 6px; background: rgba(26, 26, 46, 0.4);">
+        <h2 style="font-size: 18px; margin-bottom: 30px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">⚙️ Параметры заказа</h2>
+        
+        <!-- Service Selection -->
+        <div style="margin-bottom: 32px;">
+          <label style="display: block; margin-bottom: 20px; color: var(--text-light); font-weight: 500; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;">🎯 Тип услуги</label>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 8px;">
+            <button class="service-btn active" onclick="selectService(this, 'documents')" style="padding: 14px 16px; background: linear-gradient(135deg, var(--accent), #0099cc); border: none; border-radius: 6px; color: #0f0f1e; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; white-space: nowrap; box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);">📄 Документы</button>
+            <button class="service-btn" onclick="selectService(this, 'cards')" style="padding: 14px 16px; background: rgba(0, 212, 255, 0.1); border: 2px solid var(--border); border-radius: 6px; color: var(--text-light); cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; white-space: nowrap;">🏷️ Визитки</button>
+            <button class="service-btn" onclick="selectService(this, 'banners')" style="padding: 14px 16px; background: rgba(0, 212, 255, 0.1); border: 2px solid var(--border); border-radius: 6px; color: var(--text-light); cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; white-space: nowrap;">📢 Баннеры</button>
+            <button class="service-btn" onclick="selectService(this, 'brochures')" style="padding: 14px 16px; background: rgba(0, 212, 255, 0.1); border: 2px solid var(--border); border-radius: 6px; color: var(--text-light); cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; white-space: nowrap;">📖 Брошюры</button>
+            <button class="service-btn" onclick="selectService(this, 'flyers')" style="padding: 14px 16px; background: rgba(0, 212, 255, 0.1); border: 2px solid var(--border); border-radius: 6px; color: var(--text-light); cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; white-space: nowrap;">📰 Листовки</button>
+            <button class="service-btn" onclick="selectService(this, 'stickers')" style="padding: 14px 16px; background: rgba(0, 212, 255, 0.1); border: 2px solid var(--border); border-radius: 6px; color: var(--text-light); cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; white-space: nowrap;">✨ Наклейки</button>
+          </div>
+        </div>
+
+        <!-- Service Details by Category -->
+        <div id="service-details" style="padding-top: 32px; border-top: 1px solid var(--border);">
+          <label style="display: block; margin-bottom: 20px; color: var(--text-light); font-weight: 400; font-size: 14px;">Параметры печати</label>
+          
+          <!-- Documents -->
+          <div id="documents-config" class="config-section">
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Формат: <span id="doc-format-display">A4</span></label>
+              <input type="range" id="doc-format" min="210" max="420" value="210" step="10" style="width: 100%; cursor: pointer;" oninput="updateDocFormat(this.value); updatePrice();">
+              <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 8px;">
+                <span>A5</span>
+                <span>A4</span>
+                <span>A3</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Тираж: <span id="doc-quantity-display">500</span> шт</label>
+              <input type="range" id="doc-quantity" min="1" max="10000" value="500" step="10" style="width: 100%; cursor: pointer;" oninput="updateDocQuantity(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Печать</label>
+              <select id="doc-color" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="bw">Чёрно-белая (ч/б)</option>
+                <option value="color" selected>Цветная (4+0)</option>
+                <option value="double">Двусторонняя (4+4)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Cards -->
+          <div id="cards-config" class="config-section" style="display: none;">
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Размер</label>
+              <select id="cards-size" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="85x55" selected>Стандарт 85×55 мм</option>
+                <option value="90x50">Прямоугольник 90×50 мм</option>
+                <option value="100x60">Большой 100×60 мм</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Количество: <span id="cards-qty-display">500</span> шт</label>
+              <input type="range" id="cards-qty" min="100" max="5000" value="500" step="100" style="width: 100%; cursor: pointer;" oninput="updateCardsQty(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Материал</label>
+              <select id="cards-material" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="matte" selected>Матовая (160 г/м²)</option>
+                <option value="glossy">Глянцевая (170 г/м²)</option>
+                <option value="varnish">С УФ-лаком (200 г/м²)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Banners -->
+          <div id="banners-config" class="config-section" style="display: none;">
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Высота: <span id="banner-height-display">2</span> м</label>
+              <input type="range" id="banner-height" min="1" max="10" value="2" step="0.5" style="width: 100%; cursor: pointer;" oninput="updateBannerHeight(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Ширина: <span id="banner-width-display">3</span> м</label>
+              <input type="range" id="banner-width" min="1" max="10" value="3" step="0.5" style="width: 100%; cursor: pointer;" oninput="updateBannerWidth(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Материал</label>
+              <select id="banner-material" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="vinyl" selected>Виниловый баннер</option>
+                <option value="fabric">Fabric баннер</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Brochures -->
+          <div id="brochures-config" class="config-section" style="display: none;">
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Страниц: <span id="brochure-pages-display">4</span></label>
+              <input type="range" id="brochure-pages" min="4" max="300" value="4" step="2" style="width: 100%; cursor: pointer;" oninput="updateBrochurePages(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Тираж: <span id="brochure-qty-display">500</span> шт</label>
+              <input type="range" id="brochure-qty" min="10" max="5000" value="500" step="50" style="width: 100%; cursor: pointer;" oninput="updateBrochureQty(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Переплет</label>
+              <select id="brochure-binding" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="staple" selected>На скобу</option>
+                <option value="glue">На клей (PUR)</option>
+                <option value="hard">Твёрдый переплет</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Flyers -->
+          <div id="flyers-config" class="config-section" style="display: none;">
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Формат</label>
+              <select id="flyer-format" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="a5">A5 (148×210 мм)</option>
+                <option value="a4" selected>A4 (210×297 мм)</option>
+                <option value="a3">A3 (297×420 мм)</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Тираж: <span id="flyer-qty-display">1000</span> шт</label>
+              <input type="range" id="flyer-qty" min="100" max="10000" value="1000" step="100" style="width: 100%; cursor: pointer;" oninput="updateFlyerQty(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Бумага</label>
+              <select id="flyer-paper" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="80" selected>Белая 80 г/м²</option>
+                <option value="130">Белая 130 г/м²</option>
+                <option value="merch">Мелованная</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Stickers -->
+          <div id="stickers-config" class="config-section" style="display: none;">
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Размер: <span id="sticker-size-display\">10×10</span> см</label>
+              <select id="sticker-size" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="5x5">Маленькие 5×5 см</option>
+                <option value="10x10" selected>Квадратные 10×10 см</option>
+                <option value="15x10">Стандарт 15×10 см</option>
+                <option value="20x15">Большие 20×15 см</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Количество: <span id="sticker-qty-display">500</span> шт</label>
+              <input type="range" id="sticker-qty" min="100" max="5000" value="500" step="100" style="width: 100%; cursor: pointer;" oninput="updateStickerQty(this.value); updatePrice();">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="color: var(--text-muted); font-size: 13px; display: block; margin-bottom: 8px;">Отделка</label>
+              <select id="sticker-finish" style="width: 100%; padding: 10px 12px; background: rgba(0, 212, 255, 0.05); border: 1px solid var(--border); border-radius: 3px; color: var(--text-light); font-size: 13px; cursor: pointer;" onchange="updatePrice()">
+                <option value="matte" selected>Матовая плёнка</option>
+                <option value="glossy">Глянцевая плёнка</option>
+                <option value="transparent">Прозрачная плёнка</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Specifications & Price (Sticky) -->
+    <div style="position: sticky; top: 100px; height: fit-content;">
+      <div style="padding: 30px; border: 1px solid var(--border); border-radius: 6px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(0, 212, 255, 0.03)); backdrop-filter: blur(10px);">
+        <h3 style="font-size: 14px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; letter-spacing: 0.5px; font-weight: 600;">Details Order</h3>
+        
+        <div style="margin-bottom: 20px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 1px; font-weight: 500;">📋 Основные параметры</div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Услуга:</span>
+            <span id="spec-service" style="color: var(--text-light); font-weight: 500;">Документы</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Формат:</span>
+            <span id="spec-format" style="color: var(--text-light); font-weight: 500;">A4</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px;">
+            <span style="color: var(--text-muted);">Количество:</span>
+            <span id="spec-quantity" style="color: var(--text-light); font-weight: 500;">500 шт</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 1px; font-weight: 500;">🎨 Производство</div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Печать:</span>
+            <span id="spec-print" style="color: var(--text-light); font-weight: 500;">Цветная</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Материал:</span>
+            <span id="spec-material" style="color: var(--text-light); font-weight: 500;">Белая бумага</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px;">
+            <span style="color: var(--text-muted);">Отделка:</span>
+            <span id="spec-finish" style="color: var(--text-light); font-weight: 500;">—</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 24px; padding-top: 20px; border-top: 1px solid var(--border);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #8ab917; margin-bottom: 12px; letter-spacing: 1px; font-weight: 600;">⏱️ 📦 Сроки доставки</div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px;">
+            <span style="color: var(--text-muted);">⚡ Стандарт:</span>
+            <span style="color: var(--text-light); font-weight: 600;">3-5 дней</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px;">
+            <span style="color: var(--text-muted);">🔥 Срочный:</span>
+            <span style="color: var(--accent); font-weight: 600;">1-2 дня</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 12px;">
+            <span style="color: var(--text-muted);">⚡⚡ Экспресс:</span>
+            <span style="color: var(--accent-alt); font-weight: 600;">В день</span>
+          </div>
+        </div>
+
+        <div style="padding-top: 20px; border-top: 1px solid var(--border);">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
+            <span style="color: var(--text-muted);">Базовая цена:</span>
+            <span id="base-price" style="color: #8ab917; font-weight: 500;">2500 ₽</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 12px;">
+            <span style="color: var(--text-muted);">Скидка:</span>
+            <span id="discount-display" style="color: var(--accent); font-weight: 500;">0 ₽</span>
+          </div>
+          <div style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 212, 255, 0.08)); padding: 16px; border-radius: 4px; border: 1px solid rgba(0, 212, 255, 0.3); text-align: center;">
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Итого</div>
+            <div style="font-size: 36px; font-weight: 700; color: var(--accent); line-height: 1;"><span id="final-price">2500</span> ₽</div>
+            <div style="font-size: 10px; color: var(--text-muted); margin-top: 8px;">без доставки</div>
+          </div>
+        </div>
+
+        <a href="/order" style="display: block; width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); border: none; border-radius: 4px; color: #0f0f1e; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 20px; transition: all 0.3s ease; box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3); text-decoration: none; text-align: center;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 32px rgba(0, 212, 255, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0, 212, 255, 0.3)';">Заказать печать</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Modal -->
+  <div id="orderModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px;" onclick="if(event.target.id === 'orderModal') closeOrderModal()">
+    <div style="background: white; border-radius: 12px; width: 90%; max-width: 480px; max-height: 85vh; overflow-y: auto; padding: 35px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
+        <h2 style="margin: 0; color: #333; font-size: 22px; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 26px;">📋</span> Оставить заявку
+        </h2>
+        <button onclick="closeOrderModal()" style="background: none; border: none; color: #ccc; font-size: 28px; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">×</button>
+      </div>
+
+      <form id="orderForm" style="display: flex; flex-direction: column; gap: 18px;">
+        <!-- Name -->
+        <div>
+          <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 13px;">
+            <span>👤</span> Ваше имя *
+          </label>
+          <input type="text" id="order-name" required placeholder="Иван Иванов" style="width: 100%; padding: 11px 13px; background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 13px; font-family: inherit;" />
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 13px;">
+            <span>📱</span> Телефон *
+          </label>
+          <input type="tel" id="order-phone" required placeholder="+7 (999) 999-99-99" style="width: 100%; padding: 11px 13px; background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 13px; font-family: inherit;" />
+        </div>
+
+        <!-- Service -->
+        <div>
+          <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 13px;">
+            <span>✂️</span> Услуга *
+          </label>
+          <select id="order-service" required style="width: 100%; padding: 11px 13px; background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 13px; font-family: inherit;">
+            <option value="">Выберите услугу</option>
+            <option value="documents">Документы</option>
+            <option value="cards">Визитные карточки</option>
+            <option value="banners">Баннеры</option>
+            <option value="brochures">Брошюры</option>
+            <option value="flyers">Листовки</option>
+            <option value="stickers">Наклейки</option>
+          </select>
+        </div>
+
+        <!-- Address -->
+        <div>
+          <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 13px;">
+            <span>📍</span> Адрес
+          </label>
+          <input type="text" id="order-address" placeholder="ул. Примерная, д. 1" style="width: 100%; padding: 11px 13px; background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 13px; font-family: inherit;" />
+        </div>
+
+        <!-- Date -->
+        <div>
+          <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 13px;">
+            <span>📅</span> Удобная дата
+          </label>
+          <input type="date" id="order-date" style="width: 100%; padding: 11px 13px; background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 13px; font-family: inherit;" />
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 13px;">
+            <span>💬</span> Описание проблемы
+          </label>
+          <textarea id="order-comment" placeholder="Опишите проблему подробнее..." style="width: 100%; padding: 11px 13px; background: #f8f8f8; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 13px; font-family: inherit; min-height: 80px; resize: vertical;"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" style="width: 100%; padding: 13px 20px; background: linear-gradient(135deg, #ff6b54 0%, #ff5740 100%); color: white; border: none; border-radius: 6px; font-weight: 700; font-size: 14px; cursor: pointer; letter-spacing: 0.5px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(255, 107, 84, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <span>✈️</span> Отправить заявку
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div style="padding: 40px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 212, 255, 0.03)); border: 2px solid rgba(0, 212, 255, 0.2); border-radius: 8px; margin-bottom: 120px; box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);">
+    <h3 style="font-size: 16px; margin-bottom: 24px; color: var(--text-light); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 12px;"><span style="font-size: 20px;">❓</span> Как считается цена?</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; color: var(--text-muted); font-size: 13px; line-height: 1.8;">
+      <div style="padding: 20px; background: rgba(0, 212, 255, 0.05); border-left: 3px solid var(--accent); border-radius: 4px;">
+        <strong style="color: var(--text-light); display: block; margin-bottom: 8px; font-size: 14px;">1️⃣ Базовая стоимость</strong>
+        <p style="margin: 0;">Рассчитывается как (площадь × цена за шт) + отделка. Зависит от формата, количества и материала.</p>
+      </div>
+      <div style="padding: 20px; background: rgba(255, 0, 110, 0.05); border-left: 3px solid var(--accent-alt); border-radius: 4px;">
+        <strong style="color: var(--text-light); display: block; margin-bottom: 8px; font-size: 14px;">2️⃣ Скидки по объёму</strong>
+        <p style="margin: 0;">100-500 шт: 0% | 500-1000: 5% | 1000-5000: 10% | 5000+: 15%</p>
+      </div>
+      <div style="padding: 20px; background: rgba(138, 185, 23, 0.05); border-left: 3px solid #8ab917; border-radius: 4px;">
+        <strong style="color: var(--text-light); display: block; margin-bottom: 8px; font-size: 14px;">3️⃣ Доставка</strong>
+        <p style="margin: 0;">Рассчитывается отдельно по самовывозу (0 ₽) или почте (от 500 ₽).</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>О компании</h4>
+      <p>ООО КОНСТАНТА - профессиональная типография с 15-летним опытом</p>
+    </div>
+    <div class="footer-section">
+      <h4>Контакты</h4>
+      <p>📞 +7 (495) 123-45-67</p>
+      <p>✉️ info@konstanta.ru</p>
+      <p>📍 г. Москва</p>
+    </div>
+    <div class="footer-section">
+      <h4>Часы работы</h4>
+      <p>Пн-Пт: 09:00 - 18:00</p>
+      <p>Сб-Вс: Выходной</p>
+    </div>
+    <div class="footer-section">
+      <h4>Быстрые ссылки</h4>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+      <a href="/contacts">Контакты</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 ООО КОНСТАНТА. Все права защищены.</p>
+  </div>
+</footer>
+
+<script src="particles.js"></script>
+<script src="/chat-widget.js"></script>
+</body>
+</html>

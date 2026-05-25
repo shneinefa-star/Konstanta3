@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О нас - ООО КОНСТАНТА</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">КОН5ТАНТА</div>
+  <div class="menu">
+    <a href="/">Главная</a>
+    <a href="/about">О нас</a>
+    <a href="/services">Услуги</a>
+    <a href="/calculator">Калькулятор</a>
+    <a href="/contacts">Контакты</a>
+    <a href="/profile" style="color: var(--accent)">👤 Профиль</a>
+    <span id="admin-link" style="display:none"><a href="/admin">👑 Админ</a></span>
+    <button id="logout-btn" style="display:none; background: var(--accent-alt)" onclick="logout()">Выход</button>
+  </div>
+</nav>
+
+<div class="content">
+  <h1>О компании ООО КОНСТАНТА</h1>
+  <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 60px; max-width: 900px; line-height: 1.8;">Более 15 лет мы занимаемся полиграфией и печатью на самом современном оборудовании. Прошли путь от небольшой мастерской до крупной типографии, работающей с тысячами клиентов по всей России. Каждый проект — это вызов, который мы принимаем с полной ответственностью.</p>
+  
+  <section class="company-section">
+    <h2>Наша история развития</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2010</div>
+        <div class="timeline-content">
+          <h3>Основание компании</h3>
+          <p>ООО КОНСТАНТА основана как малая типография в центре Москвы. 3 сотрудника, одна печатная машина и огромное желание работать качественно на благо клиентов.</p>
+          <p style="color: var(--accent); margin-top: 8px; font-size: 13px;">→ Первый офис: 30 м² на ул. Примерной, Москва</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2013</div>
+        <div class="timeline-content">
+          <h3>Расширение и модернизация оборудования</h3>
+          <p>Установка современного оборудования для высокоскоростной печати. Переезд в новое помещение площадью 150 м². Расширение команды до 12 специалистов с разным опытом.</p>
+          <p style="color: var(--accent); margin-top: 8px; font-size: 13px;">→ Закупка: Heidelberg ColorMaster, Xerox 7845, брошюровщик</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2016</div>
+        <div class="timeline-content">
+          <h3>Достижение 5000+ успешных проектов</h3>
+          <p>Через 6 лет работы мы обслужили 5000+ клиентов различных масштабов - от стартапов до крупных корпораций. Открыли производственный цех площадью 300 м² для расширения мощностей.</p>
+          <p style="color: var(--accent); margin-top: 8px; font-size: 13px;">→ Награда: Лучшая типография МО по версии портала "Найди мастера"</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2019</div>
+        <div class="timeline-content">
+          <h3>Открытие филиала в Санкт-Петербурге</h3>
+          <p>Расширение географии услуг и открытие второго офиса в СПб для лучшего обслуживания клиентов Северо-Западного региона России. Начало работы с крупнейшими корпоративными заказчиками.</p>
+          <p style="color: var(--accent); margin-top: 8px; font-size: 13px;">→ Команда выросла до 25 сотрудников в двух офисах</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024</div>
+        <div class="timeline-content">
+          <h3>Цифровая трансформация на 100%</h3>
+          <p>Запуск полнофункциональной онлайн-платформы для заказов, отслеживания проектов в реальном времени и взаимодействия с дизайнерами. Интеграция с системами управления производством и ERP.</p>
+          <p style="color: var(--accent); margin-top: 8px; font-size: 13px;">→ Более 13000 успешных проектов выполнено. Развиваемся дальше!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-section" style="background: rgba(0, 212, 255, 0.05); padding: 60px; border-radius: 6px; border: 1px solid var(--border);">
+    <h2 style="margin-bottom: 50px;">Почему нас выбирают клиенты</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+      <div>
+        <div style="font-size: 44px; margin-bottom: 18px;">✓</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 16px; color: var(--text-light);">100% Гарантия качества</h3>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.8;">
+          <li>• Соблюдение цветопередачи ±5%</li>
+          <li>• Контроль качества на каждом этапе</li>
+          <li>• Возврат денег, если не устраивает</li>
+          <li>• Сертификация ISO 12647</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 44px; margin-bottom: 18px;">⚡</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 16px; color: var(--text-light);">Быстрота выполнения</h3>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.8;">
+          <li>• Минимальные сроки: от 1 дня</li>
+          <li>• Экспресс-печать 24/7</li>
+          <li>• Отслеживание в реальном времени</li>
+          <li>• Срочная доставка по РФ</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 44px; margin-bottom: 18px;">💰</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 16px; color: var(--text-light);">Справедливые цены</h3>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.8;">
+          <li>• Самые конкурентные в регионе</li>
+          <li>• Скидки от объёма (5→15%)</li>
+          <li>• Прозрачная калькуляция</li>
+          <li>• Нет скрытых коммиссий</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 44px; margin-bottom: 18px;">👥</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 16px; color: var(--text-light);">Команда профессионалов</h3>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.8;">
+          <li>• 25+ квалифицированных специалистов</li>
+          <li>• Опыт более 10 лет каждый</li>
+          <li>• Бесплатные консультации</li>
+          <li>• Нацеленность на результат</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-section">
+    <h2 style="margin-bottom: 20px;">Наш парк оборудования премиум-класса</h2>
+    <p style="color: var(--text-muted); margin-bottom: 50px; font-size: 14px;">Все машины регулярно обслуживаются и калибруются. Используем оригинальные расходники и краски европейского производства для максимального качества.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+      <div style="padding: 30px; border: 1px solid var(--border); border-radius: 6px; background: rgba(26, 26, 46, 0.4); transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)'; this.style.transform='translateY(0)';">
+        <div style="font-size: 40px; margin-bottom: 16px;">🖨️</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 10px; color: var(--text-light);">Офсетная печать</h3>
+        <p style="color: var(--accent); font-weight: 600; margin-bottom: 16px; font-size: 13px;">Heidelberg ColorMaster 6-color</p>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.9;">
+          <li>✓ Макс. формат: А2 (420×594 мм)</li>
+          <li>✓ Производительность: 10000 отп/ч</li>
+          <li>✓ 6 цветов + спец. краски</li>
+          <li>✓ Чёткость: 2400 dpi</li>
+        </ul>
+      </div>
+      <div style="padding: 30px; border: 1px solid var(--border); border-radius: 6px; background: rgba(26, 26, 46, 0.4); transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)'; this.style.transform='translateY(0)';">
+        <div style="font-size: 40px; margin-bottom: 16px;">🖥️</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 10px; color: var(--text-light);">Цифровая печать</h3>
+        <p style="color: var(--accent); font-weight: 600; margin-bottom: 16px; font-size: 13px;">Xerox Versant 180 Press</p>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.9;">
+          <li>✓ Скорость: 80 стр/мин</li>
+          <li>✓ Макс. формат: А3+ (330×480)</li>
+          <li>✓ Цветопередача: Adobe RGB</li>
+          <li>✓ Тираж: от 1 до 100000 шт</li>
+        </ul>
+      </div>
+      <div style="padding: 30px; border: 1px solid var(--border); border-radius: 6px; background: rgba(26, 26, 46, 0.4); transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)'; this.style.transform='translateY(0)';">
+        <div style="font-size: 40px; margin-bottom: 16px;">✂️</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 10px; color: var(--text-light);">Брошюровочная система</h3>
+        <p style="color: var(--accent); font-weight: 600; margin-bottom: 16px; font-size: 13px;">Heidelberg ST Booklet System</p>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.9;">
+          <li>✓ Фальцовка, подборка, брошюра</li>
+          <li>✓ Производительность: 500 шт/ч</li>
+          <li>✓ От 4 до 300 страниц</li>
+          <li>✓ Варианты: скоба, клей, спираль</li>
+        </ul>
+      </div>
+      <div style="padding: 30px; border: 1px solid var(--border); border-radius: 6px; background: rgba(26, 26, 46, 0.4); transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)'; this.style.transform='translateY(0)';">
+        <div style="font-size: 40px; margin-bottom: 16px;">🎨</div>
+        <h3 style="font-size: 18px; font-weight: 400; margin-bottom: 10px; color: var(--text-light);">Дизайн-студия</h3>
+        <p style="color: var(--accent); font-weight: 600; margin-bottom: 16px; font-size: 13px;">Команда профессионалов</p>
+        <ul style="list-style: none; color: var(--text-muted); font-size: 13px; line-height: 1.9;">
+          <li>✓ Разработка оригинал-макетов</li>
+          <li>✓ Предпечатная консультация</li>
+          <li>✓ Графический дизайн и креатив</li>
+          <li>✓ Редактирование и вёрстка</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-section">
+    <h2>Наше местоположение</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.3749046989537!2d37.61757!3d55.75222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54bcc0e0d0001%3A0x0!2z0YPQu9C80LjRgdGC0YDQsA!5e0!3m2!1sru!2sru!4v1679001234567" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="contact-info-grid">
+      <div class="contact-info-card">
+        <h3>Офис в Москве</h3>
+        <p>📍 г. Москва, ул. Примерная, д. 42</p>
+        <p>📞 +7 (495) 123-45-67</p>
+        <p>✉️ moscow@konstanta.ru</p>
+      </div>
+      <div class="contact-info-card">
+        <h3>Офис в СПб</h3>
+        <p>📍 г. Санкт-Петербург, пр. Лиговский, 23</p>
+        <p>📞 +7 (812) 456-78-90</p>
+        <p>✉️ spb@konstanta.ru</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-section cta-section">
+    <h2>Готовы работать с нами?</h2>
+    <p>Мы ждем ваш заказ! Рассчитайте стоимость в нашем калькуляторе</p>
+    <a href="/calculator" class="cta-button">Перейти в калькулятор</a>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>О компании</h4>
+      <p>ООО КОНСТАНТА - профессиональная типография с 15-летним опытом</p>
+    </div>
+    <div class="footer-section">
+      <h4>Контакты</h4>
+      <p>📞 +7 (495) 123-45-67</p>
+      <p>✉️ info@konstanta.ru</p>
+      <p>📍 г. Москва</p>
+    </div>
+    <div class="footer-section">
+      <h4>Часы работы</h4>
+      <p>Пн-Пт: 09:00 - 18:00</p>
+      <p>Сб-Вс: Выходной</p>
+    </div>
+    <div class="footer-section">
+      <h4>Быстрые ссылки</h4>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+      <a href="/contacts">Контакты</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 ООО КОНСТАНТА. Все права защищены.</p>
+  </div>
+</footer>
+
+<script>
+fetch('/api/user').then(r=>r.json()).then(d=>{
+  if(d.user){
+    if(d.role==='admin') document.getElementById('admin-link').style.display = 'block';
+  }
+});
+
+function logout(){
+  fetch('/api/logout').then(()=>window.location.href='/auth');
+}
+</script><script src="particles.js"></script>
+<script src="/chat-widget.js"></script></body>
+</html>

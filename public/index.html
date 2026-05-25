@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ООО КОНСТАНТА - Типография</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">КОН5ТАНТА</div>
+  <div class="menu">
+    <a href="/">Главная</a>
+    <a href="/about">О нас</a>
+    <a href="/services">Услуги</a>
+    <a href="/calculator">Калькулятор</a>
+    <a href="/contacts">Контакты</a>
+    <a href="/profile" style="color: var(--accent)">👤 Профиль</a>
+    <span id="admin-link" style="display:none"><a href="/admin">👑 Админ</a></span>
+    <button id="logout-btn" style="display:none; background: var(--accent-alt)" onclick="logout()">Выход</button>
+  </div>
+</nav>
+
+<div class="content">
+  <div class="hero">
+    <div class="hero-content">
+      <h1>КОНСТАНТА</h1>
+      <p>Профессиональная типография нового поколения</p>
+      <p class="hero-subtitle">Полиграфические услуги премиум-класса с гарантией качества</p>
+      <button onclick="document.querySelector('.about-showcase').scrollIntoView()">📊 О компании</button>
+    </div>
+    <div class="cube-3d">
+      <div class="cube">
+        <div class="face front">3D</div>
+        <div class="face back">PRINT</div>
+        <div class="face right">МАКЕТ</div>
+        <div class="face left">ДИЗАЙН</div>
+        <div class="face top">РАБОТ</div>
+        <div class="face bottom">САЙТЕ</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="about-showcase">
+    <h2>Почему выбирают нас?</h2>
+    <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">⚡</div>
+      <h3>Печать</h3>
+      <p>Сверхвысокая скорость печати без потери качества. Краткие сроки от 1 дня.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🎨</div>
+      <h3>Дизайн услуги</h3>
+      <p>Профессиональные дизайнеры разработают макет по вашим требованиям</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🔒</div>
+      <h3>Гарантия качества</h3>
+      <p>100% гарантия качества печати или возврат денег</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">💰</div>
+      <h3>Лучшие цены</h3>
+      <p>Конкурентные цены без скрытых комиссий и переплат</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📦</div>
+      <h3>Доставка</h3>
+      <p>Бесплатная доставка по МСК при заказе от 3000₽</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">👥</div>
+      <h3>Опыт 15 лет</h3>
+      <p>Более 15 лет опыта и 10000+ выполненных проектов</p>
+    </div>
+  </div>
+</section>
+
+<section class="process-section">
+  <h2>Как мы работаем</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-number">1</div>
+      <h4>Консультация</h4>
+      <p>Обсуждаем вашу задачу, объем работ, сроки и бюджет</p>
+      <small>Мы помогаем подобрать оптимальный вариант</small>
+    </div>
+    <div class="process-step">
+      <div class="step-number">2</div>
+      <h4>Дизайн макета</h4>
+      <p>Создаем профессиональный макет в соответствии с требованиями</p>
+      <small>Возможны правки и доработки</small>
+    </div>
+    <div class="process-step">
+      <div class="step-number">3</div>
+      <h4>Подготовка к печати</h4>
+      <p>Проверяем макет на соответствие стандартам печати</p>
+      <small>Подбираем оптимальную бумагу и краски</small>
+    </div>
+    <div class="process-step">
+      <div class="step-number">4</div>
+      <h4>Производство</h4>
+      <p>Печать на современном оборудовании Heidelberg и Xerox</p>
+      <small>Контроль качества на каждом этапе</small>
+    </div>
+    <div class="process-step">
+      <div class="step-number">5</div>
+      <h4>Отделка</h4>
+      <p>Ламинация, тиснение, резка, брошюровка по необходимости</p>
+      <small>Профессиональная упаковка и доставка</small>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>О компании</h4>
+      <p>ООО КОНСТАНТА - профессиональная типография с 15-летним опытом</p>
+    </div>
+    <div class="footer-section">
+      <h4>Контакты</h4>
+      <p>📞 +7 (495) 123-45-67</p>
+      <p>✉️ info@konstanta.ru</p>
+      <p>📍 г. Москва</p>
+    </div>
+    <div class="footer-section">
+      <h4>Часы работы</h4>
+      <p>Пн-Пт: 09:00 - 18:00</p>
+      <p>Сб-Вс: Выходной</p>
+    </div>
+    <div class="footer-section">
+      <h4>Быстрые ссылки</h4>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+      <a href="/contacts">Контакты</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 ООО КОНСТАНТА. Все права защищены.</p>
+  </div>
+</footer>
+
+<script src="particles.js"></script>
+<script>
+fetch('/api/user').then(r=>r.json()).then(d=>{
+  if(d.user){
+    if(document.getElementById('auth-link')) {
+      document.getElementById('auth-link').innerHTML = '';
+    }
+    document.getElementById('logout-btn').style.display = 'block';
+    if(d.role==='admin') document.getElementById('admin-link').style.display = 'block';
+  }
+});
+</script>
+<script src="/chat-widget.js"></script>
+</body>
+</html>
+</script>
+</body>
+</html>

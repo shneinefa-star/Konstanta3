@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ-панель - Пользователи</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f0f1e 0%, #1a2332 50%, #0f0f1e 100%);
+      min-height: 100vh;
+    }
+
+    .admin-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .admin-header h1 {
+      margin: 0;
+      color: #333;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .admin-header a {
+      background: #00d4ff;
+      color: #0f0f1e;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .admin-header a:hover {
+      background: #0099cc;
+    }
+
+    .users-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 1px solid #ddd;
+      font-size: 12px;
+    }
+
+    .users-table th {
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: #f5f5f5;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .users-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+      font-size: 12px;
+      color: #333;
+      word-break: break-all;
+      font-family: 'Courier New', monospace;
+    }
+
+    .users-table tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #00d4ff;
+      font-size: 14px;
+    }
+
+    nav {
+      background: linear-gradient(135deg, rgba(15, 15, 30, 0.95) 0%, rgba(26, 35, 50, 0.95) 100%);
+      padding: 15px 30px;
+      display: flex;
+      gap: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00d4ff;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">ПП Д</a>
+    <a href="/admin">← Назад в админ-панель</a>
+  </nav>
+
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>👥 Пользователи</h1>
+      <a href="/">Выход</a>
+    </div>
+
+    <div id="loading" class="loading">Загрузка пользователей...</div>
+
+    <table class="users-table" id="usersTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>email</th>
+          <th>password</th>
+          <th>role</th>
+          <th>avatar</th>
+          <th>created_at</th>
+        </tr>
+      </thead>
+      <tbody id="usersBody">
+      </tbody>
+    </table>
+
+    <div id="emptyMessage" class="empty-message" style="display: none;">
+      Нет пользователей
+    </div>
+  </div>
+
+  <script>
+    async function loadUsers() {
+      try {
+        const response = await fetch('/api/users-list');
+        const data = await response.json();
+
+        document.getElementById('loading').style.display = 'none';
+
+        if (data.ok && data.users && data.users.length > 0) {
+          const tbody = document.getElementById('usersBody');
+          tbody.innerHTML = '';
+
+          data.users.forEach((user, index) => {
+            const row = document.createElement('tr');
+            const hashDisplay = user.password_hash.substring(0, 50) + (user.password_hash.length > 50 ? '...' : '');
+
+            row.innerHTML = `
+              <td>${user.id}</td>
+              <td>-</td>
+              <td>${escapeHtml(user.email)}</td>
+              <td><code style="background: #f5f5f5; padding: 2px 5px; border-radius: 2px;">${escapeHtml(hashDisplay)}</code></td>
+              <td>${escapeHtml(user.role)}</td>
+              <td>-</td>
+              <td>${new Date(user.created).toLocaleString('en-US')}</td>
+            `;
+            tbody.appendChild(row);
+          });
+
+          document.getElementById('usersTable').style.display = 'table';
+        } else {
+          document.getElementById('emptyMessage').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('loading').innerHTML = '❌ Ошибка загрузки пользователей';
+      }
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    loadUsers();
+  </script>
+<script src="particles.js"></script>
+<script src="/chat-widget.js"></script>
+</body>
+</html>

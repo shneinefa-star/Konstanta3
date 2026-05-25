@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Авторизация - ООО КОНСТАНТА</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">КОН5ТАНТА</div>
+  <div class="menu">
+    <a href="/">Главная</a>
+    <a href="/about">О нас</a>
+    <a href="/contacts">Контакты</a>
+  </div>
+</nav>
+
+<div class="auth-container">
+  <div style="max-width: 500px; margin: 0 auto; padding: 60px 40px;">
+    <div class="tabs" style="display: flex; gap: 0; margin-bottom: 40px; border-bottom: 1px solid var(--border);">
+      <button class="tab-btn active" onclick="switchTab(event, 'login')" style="flex: 1; padding: 16px 24px; background: none; border: none; border-bottom: 2px solid var(--accent); color: var(--text-light); font-size: 14px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">Вход</button>
+      <button class="tab-btn" onclick="switchTab(event, 'register')" style="flex: 1; padding: 16px 24px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-size: 14px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">Регистрация</button>
+    </div>
+
+    <div id="login" class="tab-content active">
+      <h2 style="font-family: 'Georgia', serif; font-size: 32px; font-weight: 400; margin-bottom: 40px; color: var(--text-light);">Вход в профиль</h2>
+      <form id="login-form" style="display: flex; flex-direction: column; gap: 20px;">
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Пользователь</label>
+          <input type="text" id="login-user" placeholder="Введите имя пользователя" required style="width: 100%; padding: 14px 16px; background: rgba(26, 26, 46, 0.4); border: 1px solid var(--border); border-radius: 4px; color: var(--text-light); font-size: 14px; font-family: inherit; transition: all 0.3s ease;" onfocus="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)';" onblur="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)';">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Пароль</label>
+          <input type="password" id="login-pass" placeholder="Введите пароль" required style="width: 100%; padding: 14px 16px; background: rgba(26, 26, 46, 0.4); border: 1px solid var(--border); border-radius: 4px; color: var(--text-light); font-size: 14px; font-family: inherit; transition: all 0.3s ease;" onfocus="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)';" onblur="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)';">
+        </div>
+        <button type="submit" style="padding: 14px 24px; background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); border: none; border-radius: 4px; color: #0f0f1e; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; transition: all 0.3s ease; box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 32px rgba(0, 212, 255, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0, 212, 255, 0.3)';">Войти</button>
+        <div id="login-msg"></div>
+      </form>
+    </div>
+
+    <div id="register" class="tab-content" style="display: none;">
+      <h2 style="font-family: 'Georgia', serif; font-size: 32px; font-weight: 400; margin-bottom: 40px; color: var(--text-light);">Регистрация</h2>
+      <form id="register-form" style="display: flex; flex-direction: column; gap: 20px;">
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Пользователь</label>
+          <input type="text" id="reg-user" placeholder="Придумайте имя пользователя" required style="width: 100%; padding: 14px 16px; background: rgba(26, 26, 46, 0.4); border: 1px solid var(--border); border-radius: 4px; color: var(--text-light); font-size: 14px; font-family: inherit; transition: all 0.3s ease;" onfocus="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)';" onblur="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)';">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Пароль</label>
+          <input type="password" id="reg-pass" placeholder="Минимум 6 символов" required style="width: 100%; padding: 14px 16px; background: rgba(26, 26, 46, 0.4); border: 1px solid var(--border); border-radius: 4px; color: var(--text-light); font-size: 14px; font-family: inherit; transition: all 0.3s ease;" onfocus="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)';" onblur="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)';">
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Повтор пароля</label>
+          <input type="password" id="reg-pass2" placeholder="Повторите пароль" required style="width: 100%; padding: 14px 16px; background: rgba(26, 26, 46, 0.4); border: 1px solid var(--border); border-radius: 4px; color: var(--text-light); font-size: 14px; font-family: inherit; transition: all 0.3s ease;" onfocus="this.style.borderColor='var(--accent)'; this.style.background='rgba(26, 26, 46, 0.7)';" onblur="this.style.borderColor='var(--border)'; this.style.background='rgba(26, 26, 46, 0.4)';">
+        </div>
+        <button type="submit" style="padding: 14px 24px; background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); border: none; border-radius: 4px; color: #0f0f1e; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; transition: all 0.3s ease; box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 32px rgba(0, 212, 255, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0, 212, 255, 0.3)';">Зарегистрироваться</button>
+        <div id="reg-msg"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(event, tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.style.borderBottomColor = 'transparent';
+    b.style.color = 'var(--text-muted)';
+  });
+  
+  document.getElementById(tab).style.display = 'block';
+  
+  if (event && event.target) {
+    event.target.style.borderBottomColor = 'var(--accent)';
+    event.target.style.color = 'var(--text-light)';
+  } else {
+    // Find the tab button for this tab
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      if (b.onclick && b.onclick.toString().includes(tab)) {
+        b.style.borderBottomColor = 'var(--accent)';
+        b.style.color = 'var(--text-light)';
+      }
+    });
+  }
+}
+
+document.getElementById('login-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const r = await fetch('/api/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      user: document.getElementById('login-user').value,
+      pass: document.getElementById('login-pass').value
+    })
+  }).then(r => r.json());
+  
+  if(r.ok) {
+    document.getElementById('login-msg').innerHTML = '<div style="padding: 12px 16px; background: rgba(138, 185, 23, 0.1); border: 1px solid rgba(138, 185, 23, 0.3); border-radius: 4px; color: #8ab917; font-size: 13px; margin-top: 16px;">✓ Успешно вошли! Перенаправляем...</div>';
+    setTimeout(() => window.location.href = '/', 1500);
+  } else {
+    document.getElementById('login-msg').innerHTML = '<div style="padding: 12px 16px; background: rgba(255, 0, 110, 0.1); border: 1px solid rgba(255, 0, 110, 0.3); border-radius: 4px; color: #ff6b9d; font-size: 13px; margin-top: 16px;">' + r.msg + '</div>';
+  }
+};
+
+document.getElementById('register-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const pass = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+  
+  if(pass !== pass2) {
+    document.getElementById('reg-msg').innerHTML = '<div style="padding: 12px 16px; background: rgba(255, 0, 110, 0.1); border: 1px solid rgba(255, 0, 110, 0.3); border-radius: 4px; color: #ff6b9d; font-size: 13px; margin-top: 16px;">Пароли не совпадают</div>';
+    return;
+  }
+
+  const r = await fetch('/api/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      user: document.getElementById('reg-user').value,
+      pass: pass
+    })
+  }).then(r => r.json());
+  
+  if(r.ok) {
+    document.getElementById('reg-msg').innerHTML = '<div style="padding: 12px 16px; background: rgba(138, 185, 23, 0.1); border: 1px solid rgba(138, 185, 23, 0.3); border-radius: 4px; color: #8ab917; font-size: 13px; margin-top: 16px;">✓ Зарегистрирован! Войдите в систему</div>';
+    setTimeout(() => switchTab(null, 'login'), 2000);
+  } else {
+    document.getElementById('reg-msg').innerHTML = '<div style="padding: 12px 16px; background: rgba(255, 0, 110, 0.1); border: 1px solid rgba(255, 0, 110, 0.3); border-radius: 4px; color: #ff6b9d; font-size: 13px; margin-top: 16px;">' + r.msg + '</div>';
+  }
+};
+</script>
+<script src="particles.js"></script>
+<script src="/chat-widget.js"></script>
+</body>
+</html>

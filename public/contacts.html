@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты - ООО КОНСТАНТА</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">КОН5ТАНТА</div>
+  <div class="menu">
+    <a href="/">Главная</a>
+    <a href="/about">О нас</a>
+    <a href="/services">Услуги</a>
+    <a href="/calculator">Калькулятор</a>
+    <a href="/contacts">Контакты</a>
+    <a href="/profile" style="color: var(--accent)">👤 Профиль</a>
+    <span id="admin-link" style="display:none"><a href="/admin">👑 Админ</a></span>
+    <button id="logout-btn" style="display:none; background: var(--accent-alt)" onclick="logout()">Выход</button>
+  </div>
+</nav>
+
+<div class="content">
+  <h1>Контакты и единая служба поддержки</h1>
+  
+  <div class="contacts-info-main">
+    <div class="contact-block">
+      <h2>📍 Офис в Москве (Головной офис)</h2>
+      <p><strong>Адрес:</strong> г. Москва, ул. Примерная, д. 42, офис 305</p>
+      <p><strong>Телефон:</strong> +7 (495) 123-45-67</p>
+      <p><strong>Факс:</strong> +7 (495) 123-45-68</p>
+      <p><strong>Email:</strong> moscow@konstanta.ru</p>
+      <p><strong>Часы работы:</strong> Пн-Пт: 09:00-18:00 (обеденный перерыв 13:00-14:00)</p>
+      <p><strong>Выходные:</strong> Сб-Вс</p>
+    </div>
+
+    <div class="contact-block">
+      <h2>📍 Офис в Санкт-Петербурге</h2>
+      <p><strong>Адрес:</strong> г. Санкт-Петербург, пр. Лиговский, д. 23, офис 102</p>
+      <p><strong>Телефон:</strong> +7 (812) 456-78-90</p>
+      <p><strong>Email:</strong> spb@konstanta.ru</p>
+      <p><strong>Часы работы:</strong> Пн-Пт: 10:00-19:00</p>
+      <p><strong>Выходные:</strong> Сб-Вс</p>
+    </div>
+
+    <div class="contact-block">
+      <h2>📞 Горячая линия</h2>
+      <p><strong>Единый номер для оказания помощи:</strong> +7 (800) 123-45-00 (звонок бесплатный)</p>
+      <p><strong>Время работы:</strong> Пн-Пт: 08:00-21:00, Сб-Вс: 09:00-18:00</p>
+      <p><strong>WhatsApp/Telegram:</strong> +7 (495) 123-45-67</p>
+      <p><strong>Основной Email:</strong> info@konstanta.ru</p>
+    </div>
+  </div>
+
+  <div class="contacts-grid">
+    <div class="contact-service-card">
+      <h3>💼 Для Корпоративных клиентов</h3>
+      <p>Специалист по работе с юр. лицами</p>
+      <p>📫 corporate@konstanta.ru</p>
+      <p>📞 +7 (495) 111-22-33</p>
+    </div>
+    <div class="contact-service-card">
+      <h3>🎨 Дизайн и консультация</h3>
+      <p>Получите бесплатную консультацию дизайнера</p>
+      <p>📫 design@konstanta.ru</p>
+      <p>📞 +7 (495) 444-55-66</p>
+    </div>
+    <div class="contact-service-card">
+      <h3>🚚 Доставка и логистика</h3>
+      <p>Вопросы по доставке и отправке товара</p>
+      <p>📫 delivery@konstanta.ru</p>
+      <p>📞 +7 (495) 777-88-99</p>
+    </div>
+    <div class="contact-service-card">
+      <h3>💳 Счета и оплата</h3>
+      <p>Вопросы по выставлению счетов</p>
+      <p>📫 billing@konstanta.ru</p>
+      <p>📞 +7 (495) 666-33-44</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 40px; text-align: center;">Способы оплаты</h2>
+  <div class="payment-methods">
+    <div class="payment-method">
+      <div class="payment-icon">💳</div>
+      <h4>Банковские карты</h4>
+      <p>Visa, Mastercard, МИР (безопасно через HTTPS)</p>
+    </div>
+    <div class="payment-method">
+      <div class="payment-icon">🏦</div>
+      <h4>Банковский перевод</h4>
+      <p>Для юр. лиц и индивидуальных предпринимателей</p>
+    </div>
+    <div class="payment-method">
+      <div class="payment-icon">💰</div>
+      <h4>Наличный расчет</h4>
+      <p>Возможна оплата при получении заказа</p>
+    </div>
+    <div class="payment-method">
+      <div class="payment-icon">📱</div>
+      <h4>Электронные платежи</h4>
+      <p>Яндекс.Касса, PayPal, Киви</p>
+    </div>
+  </div>
+  
+  <div class="contact-form">
+    <h2>Отправьте сообщение</h2>
+    <div class="form-notice">Заполните форму ниже, и наш специалист свяжется с вами в течение 2 часов</div>
+    <form>
+      <div class="form-row">
+        <input type="text" placeholder="Ваше имя*" required>
+        <input type="email" placeholder="Ваш Email*" required>
+      </div>
+      <div class="form-row">
+        <input type="tel" placeholder="Телефон*" required>
+        <select required>
+          <option value="">Выберите вид услуги*</option>
+          <option>Визитные карточки</option>
+          <option>Листовки и баннеры</option>
+          <option>Брошюры и каталоги</option>
+          <option>Документы и грамоты</option>
+          <option>Прочее</option>
+        </select>
+      </div>
+      <textarea placeholder="Опишите вашу задачу" rows="6"></textarea>
+      <button type="submit" class="form-submit-btn">Отправить</button>
+    </form>
+  </div>
+
+  <section class="faq-section">
+    <h2>Часто задаваемые вопросы</h2>
+    <div class="faq-items">
+      <div class="faq-item">
+        <h4>❓ Сколько времени занимает разработка макета?</h4>
+        <p>Обычно макет разрабатывается 1-3 рабочих дня. Срок может быть сокращен при 100% оплате услуги дизайна.</p>
+      </div>
+      <div class="faq-item">
+        <h4>❓ Какой минимальный тираж?</h4>
+        <p>Для большинства услуг минимальный тираж - 50 копий. Для премиум услуг (тиснение, лак) - 100 копий.</p>
+      </div>
+      <div class="faq-item">
+        <h4>❓ Может ли быть печать на выходных?</h4>
+        <p>Да, срочные заказы обрабатываются в выходные по согласованию и с доп. платой (30% от стоимости).</p>
+      </div>
+      <div class="faq-item">
+        <h4>❓ Какие есть способы доставки?</h4>
+        <p>Доставка курьером по Москве (бесплатная от 3000₽), полной или ТК в другие города, самовывоз из офиса.</p>
+      </div>
+      <div class="faq-item">
+        <h4>❓ Есть ли гарантия на качество?</h4>
+        <p>Да, 100% гарантия качества или возврат денег. Мы гарантируем соответствие макету и цветопередаче (±5%).</p>
+      </div>
+      <div class="faq-item">
+        <h4>❓ Можно ли использовать свой шрифт?</h4>
+        <p>Да, можно. Просто передайте нам файл шрифта или укажите название шрифта при оформлении заказа.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>О компании</h4>
+      <p>ООО КОНСТАНТА - профессиональная типография с 15-летним опытом</p>
+    </div>
+    <div class="footer-section">
+      <h4>Контакты</h4>
+      <p>📞 +7 (495) 123-45-67</p>
+      <p>✉️ info@konstanta.ru</p>
+      <p>📍 г. Москва</p>
+    </div>
+    <div class="footer-section">
+      <h4>Часы работы</h4>
+      <p>Пн-Пт: 09:00 - 18:00</p>
+      <p>Сб-Вс: Выходной</p>
+    </div>
+    <div class="footer-section">
+      <h4>Быстрые ссылки</h4>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+      <a href="/contacts">Контакты</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 ООО КОНСТАНТА. Все права защищены.</p>
+  </div>
+</footer>
+
+<script>
+fetch('/api/user').then(r=>r.json()).then(d=>{
+  if(d.user){
+    if(d.role==='admin') document.getElementById('admin-link').style.display = 'block';
+  }
+});
+
+function logout(){
+  fetch('/api/logout').then(()=>window.location.href='/auth');
+}
+</script>
+<script src="particles.js"></script>
+<script src="/chat-widget.js"></script>
+</body>
+</html>
